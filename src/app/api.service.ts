@@ -5,11 +5,12 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class ApiService {
 
+  private serverUrl: string = 'http://localhost:3000/api';
   constructor(private http: CustomHttpService) { }
 
   get(path): Promise<Object> {
 
-    return this.http.get(path)
+    return this.http.get(this.serverUrl + path)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError)
@@ -18,7 +19,7 @@ export class ApiService {
 
   post(path, obj) {
 
-    return this.http.post(path, obj)
+    return this.http.post(this.serverUrl + path, obj)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError)
@@ -29,7 +30,7 @@ export class ApiService {
 
   put(path, obj) {
 
-    return this.http.put(path, obj)
+    return this.http.put(this.serverUrl + path, obj)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError)
@@ -39,7 +40,7 @@ export class ApiService {
 
   delete(path) {
 
-    return this.http.delete(path)
+    return this.http.delete(this.serverUrl + path)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError)
